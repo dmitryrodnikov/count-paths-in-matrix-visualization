@@ -97,25 +97,6 @@ function App() {
         });
     };
 
-    const handleResume = () => {
-        setRunning(true);
-        setDone(false);
-
-        let res = generator.current?.next();
-
-        timer.current = window.setInterval(() => {
-            if (res?.done) {
-                setAmount(res.value);
-                setRunning(false);
-                setDone(true);
-                if (timer.current) {
-                    window.clearInterval(timer.current);
-                }
-            }
-            res = generator.current ? generator.current.next() : { done: true, value: null };
-        }, speed);
-    };
-
     const handleReset = () => {
         clearResults();
         clearStatus();
@@ -167,6 +148,33 @@ function App() {
         }
     }, []);
 
+    const handleResume = (speed: number) => {
+        setRunning(true);
+        setDone(false);
+
+        let res = generator.current?.next();
+
+        timer.current = window.setInterval(() => {
+            if (res?.done) {
+                setAmount(res.value);
+                setRunning(false);
+                setDone(true);
+                if (timer.current) {
+                    window.clearInterval(timer.current);
+                }
+            }
+            res = generator.current ? generator.current.next() : { done: true, value: null };
+        }, speed);
+    };
+
+    const handleSpeedChange = (value: number) => {
+        setSpeed(value);
+        if (isRunning) {
+            handlePause();
+            handleResume(value);
+        }
+    };
+
     return (
         <div className="root">
             <h1>Find all paths from Top Left to Bottom Right corner</h1>
@@ -174,7 +182,7 @@ function App() {
             <div className="controls">
                 <button
                     className="button primary"
-                    onClick={isRunning ? handlePause : isDone ? handleStart : handleResume}
+                    onClick={isRunning ? handlePause : isDone ? handleStart : () => handleResume(speed)}
                     style={{ width: 100 }}
                 >
                     {isRunning ? 'Pause' : isDone ? 'Start' : 'Resume'}
@@ -185,7 +193,7 @@ function App() {
                 <button className="button secondary" onClick={handleReset}>
                     Clear walls
                 </button>
-                <RadioSwitch values={speedSettings} onChange={setSpeed} />
+                <RadioSwitch values={speedSettings} onChange={handleSpeedChange} />
             </div>
             <div className="content">
                 <Grid grid={grid} onCellClick={toggleWall} selected={selected} />
