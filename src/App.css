@@ -1,5 +1,12 @@
+#root {
+    display: flex;
+}
+
 .root {
-    padding: 100px;
+    padding: 40px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
 }
 .description {
     margin-bottom: 20px;
@@ -8,6 +15,8 @@
 .controls {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
+    margin-top: 40px;
     margin-bottom: 20px;
 }
 
@@ -17,9 +26,10 @@
 }
 
 .results {
+    width: 200px;
     padding: 20px;
     border: 1px solid #cecece;
-    margin-left: 20px;
+    margin-top: 40px;
 }
 
 .button {
@@ -28,11 +38,14 @@
     border: none;
     border-radius: 6px;
     cursor: pointer;
+    white-space: nowrap;
+    margin-right: 8px;
+    margin-bottom: 10px;
 }
 
 .primary {
     background: mediumblue;
-    margin-right: 20px;
+    margin-right: 8px;
 }
 
 .secondary {

@@ -16,6 +16,7 @@ export const RadioSwitch = <T,>({ values, onChange }: RadioSwitchProps<T>) => {
             {values.map(({ label, value }, index) => {
                 return (
                     <button
+                        key={index}
                         className={cn(styles.item, index === selected && styles.selected)}
                         onClick={() => {
                             setSelected(index);

@@ -9,11 +9,7 @@ interface GridProps {
     onCellClick: (rowIndex: number, colIndex: number) => void;
 }
 
-let count = 0;
-
 export const Grid = ({ grid, onCellClick, selected }: GridProps) => {
-    console.log(count);
-    count++;
     return (
         <div>
             {grid.map((row, rowIndex) => {

@@ -50,7 +50,7 @@ export const Cell = ({ rowIndex, colIndex, onClick, isSelected, isMemoized, isWa
             }}
             onClick={handleClick}
         >
-            {!isWall && <div>{paths || '-'}</div>}
+            {(!isWall && paths) || '-'}
         </div>
     );
 };

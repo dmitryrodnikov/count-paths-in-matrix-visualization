@@ -9,4 +9,10 @@
     font-size: 11px;
     background: #fff;
     color: #fff;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.cell:hover {
+    background: #cecece;
 }

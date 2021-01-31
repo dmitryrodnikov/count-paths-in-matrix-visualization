@@ -4,7 +4,7 @@ import { Grid } from './grid/grid';
 import { RadioSwitch } from './radio-switch/radio-switch';
 import './App.css';
 
-const createInitialGrid = (width: number, height: number, generateWalls: boolean): binaryGrid => {
+const createGrid = (width: number, height: number, generateWalls: boolean): binaryGrid => {
     const grid = [];
 
     for (let h = 0; h < height; h++) {
@@ -29,7 +29,10 @@ const createInitialGrid = (width: number, height: number, generateWalls: boolean
  * todo legend for colors of cell
  */
 
-const initial = createInitialGrid(10, 10, true);
+const gridSize: [number, number] = [15, 10];
+const createInitialGrid = (generateWalls: boolean) => createGrid(...gridSize, generateWalls);
+const initial = createInitialGrid(true);
+
 const speedSettings = [
     { value: 30, label: 'Fast' },
     { value: 100, label: 'Medium' },
@@ -42,7 +45,7 @@ function App() {
     const [memory, setMemory] = useState<number>(0);
     const [iterations, setIterations] = useState<number>(0);
     // Settings
-    const [speed, setSpeed] = useState<number>(0);
+    const [speed, setSpeed] = useState<number>(speedSettings[0].value);
     const [grid, setGrid] = useState<binaryGrid>(initial);
     // Status
     const [isRunning, setRunning] = useState<boolean>(false);
@@ -100,7 +103,7 @@ function App() {
     const handleReset = () => {
         clearResults();
         clearStatus();
-        setGrid(createInitialGrid(10, 10, false));
+        setGrid(createInitialGrid(false));
 
         if (timer.current) {
             window.clearInterval(timer.current);
@@ -110,7 +113,7 @@ function App() {
     const handleGenerateWalls = () => {
         clearResults();
         clearStatus();
-        setGrid(createInitialGrid(10, 10, true));
+        setGrid(createInitialGrid(true));
 
         if (timer.current) {
             window.clearInterval(timer.current);
@@ -177,8 +180,10 @@ function App() {
 
     return (
         <div className="root">
-            <h1>Find all paths from Top Left to Bottom Right corner</h1>
-            <div className="description">Restrictions: You can only step right and bottom. Avoid walls</div>
+            <h1>Count all possible paths from TOP LEFT to BOTTOM RIGHT corner</h1>
+            <div className="description">
+                You can only step <b>right</b> and <b>bottom</b>. Avoid walls (black cells).
+            </div>
             <div className="controls">
                 <button
                     className="button primary"
@@ -195,13 +200,11 @@ function App() {
                 </button>
                 <RadioSwitch values={speedSettings} onChange={handleSpeedChange} />
             </div>
-            <div className="content">
-                <Grid grid={grid} onCellClick={toggleWall} selected={selected} />
-                <div className="results">
-                    <div className="result">Result: {amount}</div>
-                    <div className="info">Memoized: {memory}</div>
-                    <div className="info"> Iterations: {iterations}</div>
-                </div>
+            <Grid grid={grid} onCellClick={toggleWall} selected={selected} />
+            <div className="results">
+                <div className="result">Result: {amount}</div>
+                <div className="info">Memoized: {memory}</div>
+                <div className="info"> Iterations: {iterations}</div>
             </div>
         </div>
     );
