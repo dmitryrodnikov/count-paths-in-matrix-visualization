@@ -1,0 +1,30 @@
+.container {
+    display: flex;
+    align-items: center;
+}
+
+.item {
+    padding: 10px 20px;
+    background: #b9bfc6;
+    cursor: pointer;
+    color: #fff;
+    border: none;
+    box-sizing: border-box;
+    margin-right: 2px;
+}
+
+.item.selected {
+    background: #516880;
+}
+
+.item:first-child {
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+}
+
+
+.item:last-child {
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    margin-right: 0;
+}

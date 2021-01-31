@@ -4,18 +4,16 @@ export type binaryGrid = {
     memoized?: boolean;
 }[][];
 
-export function calculateAllPaths(
-    gridP: binaryGrid,
-    stepCallback: (props: {
-        rowNum: number;
-        colNum: number;
-        isBack: boolean;
-        amount: number;
-        isMemo: boolean;
-        memory: number;
-    }) => void,
-    onStep: VoidFunction,
-) {
+export type StepHandler = (props: {
+    grid: binaryGrid;
+    rowNum: number;
+    colNum: number;
+    amount: number;
+    isMemo: boolean;
+    memory: number;
+}) => void;
+
+export function calculateAllPaths(gridP: binaryGrid, stepCallback: StepHandler, onStep: VoidFunction) {
     const grid = [...gridP];
     const memo: Record<string, number> = {};
 
@@ -28,9 +26,9 @@ export function calculateAllPaths(
         // End of path
         if (rowNum === grid[0].length - 1 && colNum === grid.length - 1) {
             yield stepCallback({
+                grid,
                 rowNum,
                 colNum,
-                isBack: true,
                 amount: 1,
                 isMemo: false,
                 memory: Object.keys(memo).length,
@@ -42,9 +40,9 @@ export function calculateAllPaths(
         let pathsRight = 0;
 
         yield stepCallback({
+            grid,
             rowNum,
             colNum,
-            isBack: false,
             amount: 0,
             isMemo: false,
             memory: Object.keys(memo).length,
@@ -53,9 +51,9 @@ export function calculateAllPaths(
         // get value from memory
         if (memo[`${rowNum}${colNum}`] !== undefined) {
             yield stepCallback({
+                grid,
                 rowNum,
                 colNum,
-                isBack: true,
                 amount: memo[`${rowNum}${colNum}`],
                 isMemo: false,
                 memory: Object.keys(memo).length,
@@ -77,9 +75,9 @@ export function calculateAllPaths(
         }
 
         yield stepCallback({
+            grid,
             rowNum,
             colNum,
-            isBack: true,
             amount: pathsRight + pathsBottom,
             isMemo: true,
             memory: Object.keys(memo).length,

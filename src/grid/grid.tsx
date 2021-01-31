@@ -1,6 +1,7 @@
 import React from 'react';
-import { binaryGrid } from './calculate-paths';
+import { binaryGrid } from '../calculate-paths';
 import { Cell } from './cell';
+import { Row } from './row';
 
 interface GridProps {
     grid: binaryGrid;
@@ -8,15 +9,20 @@ interface GridProps {
     onCellClick: (rowIndex: number, colIndex: number) => void;
 }
 
+let count = 0;
+
 export const Grid = ({ grid, onCellClick, selected }: GridProps) => {
+    console.log(count);
+    count++;
     return (
-        <>
+        <div>
             {grid.map((row, rowIndex) => {
                 return (
-                    <div key={rowIndex} style={{ display: 'flex' }}>
+                    <Row key={rowIndex}>
                         {row.map((cell, colIndex) => {
                             return (
                                 <Cell
+                                    key={colIndex}
                                     onClick={onCellClick}
                                     rowIndex={rowIndex}
                                     colIndex={colIndex}
@@ -27,9 +33,9 @@ export const Grid = ({ grid, onCellClick, selected }: GridProps) => {
                                 />
                             );
                         })}
-                    </div>
+                    </Row>
                 );
             })}
-        </>
+        </div>
     );
 };

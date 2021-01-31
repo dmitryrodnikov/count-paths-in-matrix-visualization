@@ -1,4 +1,6 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useMemo } from 'react';
+
+import styles from './cell.module.css';
 
 interface CellProps {
     isSelected: boolean;
@@ -11,51 +13,44 @@ interface CellProps {
 }
 
 export const Cell = ({ rowIndex, colIndex, onClick, isSelected, isMemoized, isWall, paths }: CellProps) => {
-    const handleClick = useCallback(() => {
+    const handleClick = () => {
         onClick(rowIndex, colIndex);
-    }, [rowIndex, colIndex, onClick]);
+    };
 
     const { background, color, borderColor } = useMemo<{
-        background: string;
-        color: string;
+        background?: string;
+        color?: string;
         borderColor?: string;
     }>(() => {
         if (isWall) {
-            return { background: '#113344', color: 'white' };
+            return { background: '#113344' };
         }
 
         if (isSelected) {
-            return { background: '#ff6600', color: 'white' };
+            return { background: '#ff6600' };
         }
 
         if (isMemoized) {
-            return paths > 0 ? { background: '#40916c', color: 'white' } : { background: '#b9cdc4', color: 'white' };
+            return paths > 0 ? { background: '#40916c' } : { background: '#b9cdc4' };
         }
 
         return {
-            background: 'white',
-            color: 'gray',
+            color: '#666',
             borderColor: '#cecece',
         };
     }, [isWall, isSelected, isMemoized, paths]);
 
     return (
         <div
-            key={colIndex}
+            className={styles.cell}
             style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                width: '40px',
-                height: '40px',
-                margin: '2px',
                 background,
                 color,
-                border: `1px solid ${borderColor || background}`,
+                borderColor: borderColor || background,
             }}
             onClick={handleClick}
         >
-            {!isWall && <div style={{ fontSize: '11px' }}>{paths || '-'}</div>}
+            {!isWall && <div>{paths || '-'}</div>}
         </div>
     );
 };

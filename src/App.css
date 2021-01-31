@@ -1,3 +1,6 @@
+.root {
+    padding: 100px;
+}
 .description {
     margin-bottom: 20px;
 }
@@ -8,21 +11,40 @@
     margin-bottom: 20px;
 }
 
-.start {
+.content {
+    display: flex;
+    align-items: flex-start;
+}
+
+.results {
+    padding: 20px;
+    border: 1px solid #cecece;
+    margin-left: 20px;
+}
+
+.button {
     padding: 10px 20px;
-    background: blue;
-    color: white;
+    color: #ffffff;
     border: none;
-    border-radius: 10px;
+    border-radius: 6px;
     cursor: pointer;
+}
+
+.primary {
+    background: mediumblue;
     margin-right: 20px;
+}
+
+.secondary {
+    background: #516880;
+    margin-right: 8px;
 }
 
 .result {
     font-weight: bold;
-    margin-right: 20px;
+    margin-bottom: 4px;
 }
 
 .info {
-    margin-right: 20px;
+    margin-bottom: 4px;
 }
