@@ -1,5 +1,6 @@
 import React, { useCallback, useRef, useState } from 'react';
 import { binaryGrid, calculateAllPaths, StepHandler } from './calculate-paths';
+import { Code } from './code';
 import { Grid } from './grid/grid';
 import { RadioSwitch } from './radio-switch/radio-switch';
 import './App.css';
@@ -180,7 +181,7 @@ function App() {
 
     return (
         <div className="root">
-            <h1>Count all possible paths from TOP LEFT to BOTTOM RIGHT corner</h1>
+            <h1>Count all possible paths from TOP LEFT to BOTTOM RIGHT corner of matrix</h1>
             <div className="description">
                 You can only step <b>right</b> and <b>bottom</b>. Avoid walls (black cells).
             </div>
@@ -206,6 +207,8 @@ function App() {
                 <div className="info">Memoized: {memory}</div>
                 <div className="info"> Iterations: {iterations}</div>
             </div>
+            <h2>Solution with memoization</h2>
+            <Code />
         </div>
     );
 }
