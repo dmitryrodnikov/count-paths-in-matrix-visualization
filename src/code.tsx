@@ -1,11 +1,10 @@
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { lioshi } from 'react-syntax-highlighter/dist/esm/styles/hljs';
-import { binaryGrid } from './calculate-paths';
 
-export function calculateAllPaths(matrix: binaryGrid) {
-    const memo: Record<string, number> = {};
+const code = `function calculateAllPaths(matrix) {
+    const memo = {};
 
-    function step(row: number, col: number) {
+    function step(row, col) {
         if (matrix[row][col].isWall) {
             return 0;
         }
@@ -17,8 +16,8 @@ export function calculateAllPaths(matrix: binaryGrid) {
         let pathsBottom = 0;
         let pathsRight = 0;
 
-        if (memo[`${row}${col}`] !== undefined) {
-            return memo[`${row}${col}`];
+        if (memo['' + row + col] !== undefined) {
+            return memo['' + row + col];
         }
 
         if (col < matrix[0].length - 1) {
@@ -29,18 +28,18 @@ export function calculateAllPaths(matrix: binaryGrid) {
             pathsBottom = step(row + 1, col);
         }
 
-        memo[`${row}${col}`] = pathsRight + pathsBottom;
+        memo['' + row + col] = pathsRight + pathsBottom;
 
         return pathsRight + pathsBottom;
     }
 
     return step(0, 0);
-}
+}`;
 
 export const Code = () => {
     return (
         <SyntaxHighlighter language="javascript" style={lioshi}>
-            {calculateAllPaths.toString()}
+            {code}
         </SyntaxHighlighter>
     );
 };
