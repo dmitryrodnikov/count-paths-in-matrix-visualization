@@ -1,11 +1,19 @@
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { lioshi } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
-const code = `function calculateAllPaths(matrix) {
+const code = `
+    // "1" represents wall
+    const exampleMatrix = [
+        [0, 1, 0],
+        [0, 0, 1],
+        [1, 0, 0], 
+    ];
+    
+    function calculateAllPaths(matrix) {
     const memo = {};
 
     function step(row, col) {
-        if (matrix[row][col].isWall) {
+        if (matrix[row][col] === 1) {
             return 0;
         }
 
