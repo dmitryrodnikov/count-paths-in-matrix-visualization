@@ -185,6 +185,7 @@ function App() {
             <div className="description">
                 You can only step <b>right</b> and <b>bottom</b>. Avoid walls (black cells).
             </div>
+            <h2>Visualization</h2>
             <div className="controls">
                 <button
                     className="button primary"
@@ -207,7 +208,7 @@ function App() {
                 <div className="info">Memoized: {memory}</div>
                 <div className="info"> Iterations: {iterations}</div>
             </div>
-            <h2>Solution with memoization</h2>
+            <h2>Solution. Recursion with memoization</h2>
             <Code />
         </div>
     );

@@ -10,14 +10,14 @@
     box-sizing: border-box;
 }
 .description {
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 
 .controls {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    margin-top: 40px;
+    margin-top: 10px;
     margin-bottom: 20px;
 }
 
