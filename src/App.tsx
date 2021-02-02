@@ -210,6 +210,7 @@ function App() {
             </div>
             <h2>Solution. Recursion with memoization</h2>
             <Code />
+            <a href="https://github.com/dmitryrodnikov/count-paths-in-matrix-visualization">View source on GitHub</a>
         </div>
     );
 }
